@@ -1,21 +1,29 @@
-function App() {
-  return (
-    <div className='App'>
-      <header className='App-header'>
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className='App-link'
-          href='https://reactjs.org'
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  )
-}
+import { ThemeProvider, createTheme } from '@mui/material/styles'
+import CssBaseline from '@mui/material/CssBaseline'
+import { Routes, Route } from 'react-router-dom'
+import Basic from './layouts/Basic'
+import Root from './pages/Root'
+import Employees from './pages/Employees'
+
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+})
+
+const App = () => (
+  <ThemeProvider theme={darkTheme}>
+    <CssBaseline />
+    <Routes>
+      <Route path='/' element={<Basic />}>
+        <Route index element={<Root />} />
+        <Route path='employees'>
+          <Route index element={<Employees />} />
+        </Route>
+        <Route path='enterprise' />
+      </Route>
+    </Routes>
+  </ThemeProvider>
+)
 
 export default App
