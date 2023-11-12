@@ -96,6 +96,7 @@ const Employees = () => {
 
   const handleChangeKeyword = event => {
     clearTimeout(timerRef.current)
+
     const timer = setTimeout(() => {
       setPage(0)
       setKeyword(event.target.value)
