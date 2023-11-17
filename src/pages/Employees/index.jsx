@@ -1,9 +1,6 @@
-import SearchIcon from '@mui/icons-material/Search'
-import InputBase from '@mui/material/InputBase'
 import MuiLink from '@mui/material/Link'
 import Paper from '@mui/material/Paper'
 import Skeleton from '@mui/material/Skeleton'
-import { styled, alpha } from '@mui/material/styles'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
@@ -15,58 +12,16 @@ import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 
 import { chain, isArray, map } from 'lodash'
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { Link, generatePath } from 'react-router-dom'
 import sleep from '../../helpers/sleep'
-
-const Search = styled('div')(({ theme }) => ({
-  position: 'relative',
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  '&:hover': {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
-  marginLeft: 0,
-  width: '100%',
-  [theme.breakpoints.up('sm')]: {
-    marginLeft: theme.spacing(1),
-    width: 'auto',
-  },
-}))
-
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: '100%',
-  position: 'absolute',
-  pointerEvents: 'none',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-}))
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: 'inherit',
-  '& .MuiInputBase-input': {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      width: '12ch',
-      '&:focus': {
-        width: '20ch',
-      },
-    },
-  },
-}))
+import Search from '../../components/Search'
 
 const Employees = () => {
   const [employees, setEmployees] = useState(null)
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(5)
   const [keyword, setKeyword] = useState('')
-  const timerRef = useRef(null)
 
   const fetch = useCallback(() => {
     sleep(300).then(() =>
@@ -94,15 +49,9 @@ const Employees = () => {
     fetch()
   }, [fetch])
 
-  const handleChangeKeyword = event => {
-    clearTimeout(timerRef.current)
-
-    const timer = setTimeout(() => {
-      setPage(0)
-      setKeyword(event.target.value)
-    }, 500)
-
-    timerRef.current = timer
+  const handleChangeKeyword = value => {
+    setPage(0)
+    setKeyword(value)
   }
 
   const handleChangePage = (_event, newPage) => {
@@ -196,16 +145,16 @@ const Employees = () => {
         <Typography sx={{ flex: '1 1 100%' }} variant='h6' component='div'>
           Employees
         </Typography>
-        <Search>
-          <SearchIconWrapper>
-            <SearchIcon />
-          </SearchIconWrapper>
-          <StyledInputBase
-            placeholder='Search…'
-            inputProps={{ 'aria-label': 'search' }}
-            onChange={handleChangeKeyword}
-          />
-        </Search>
+        <Search
+          onChange={handleChangeKeyword}
+          sx={theme => ({
+            marginLeft: 0,
+            [theme.breakpoints.up('sm')]: {
+              marginLeft: theme.spacing(1),
+              width: 'auto',
+            },
+          })}
+        />
       </Toolbar>
       <Table stickyHeader>
         <TableHead>

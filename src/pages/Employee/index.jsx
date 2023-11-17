@@ -29,8 +29,6 @@ import TextField from '@mui/material/TextField'
 import Paper from '@mui/material/Paper'
 import Skeleton from '@mui/material/Skeleton'
 
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import { DateTimeField } from '@mui/x-date-pickers/DateTimeField'
 
@@ -599,26 +597,24 @@ const Employee = () => {
 
   return (
     <Paper>
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <TabContext value={tab}>
-          <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-            <TabList onChange={handleChange}>
-              <Tab
-                label='Basic Info'
-                value='basicInfo'
-                sx={{ letterSpacing: '1px' }}
-              />
-              <Tab label='Card' value='card' sx={{ letterSpacing: '1px' }} />
-            </TabList>
-          </Box>
-          <TabPanel value='basicInfo'>
-            <BasicInfo id={id} />
-          </TabPanel>
-          <TabPanel value='card'>
-            <Card id={id} />
-          </TabPanel>
-        </TabContext>
-      </LocalizationProvider>
+      <TabContext value={tab}>
+        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+          <TabList onChange={handleChange}>
+            <Tab
+              label='Basic Info'
+              value='basicInfo'
+              sx={{ letterSpacing: '1px' }}
+            />
+            <Tab label='Card' value='card' sx={{ letterSpacing: '1px' }} />
+          </TabList>
+        </Box>
+        <TabPanel value='basicInfo'>
+          <BasicInfo id={id} />
+        </TabPanel>
+        <TabPanel value='card'>
+          <Card id={id} />
+        </TabPanel>
+      </TabContext>
     </Paper>
   )
 }
