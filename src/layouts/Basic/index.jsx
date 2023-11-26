@@ -85,7 +85,11 @@ const Basic = props => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
+          <Typography
+            variant='h6'
+            component='div'
+            sx={{ flexGrow: 1, cursor: 'default' }}
+          >
             HR Service
           </Typography>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>

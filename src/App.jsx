@@ -5,12 +5,13 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 
 import { SnackbarProvider } from 'notistack'
-import { Routes, Route } from 'react-router-dom'
+import { Navigate, Routes, Route } from 'react-router-dom'
 import Basic from './layouts/Basic'
 import Root from './pages/Root'
 import Employees from './pages/Employees'
 import Employee from './pages/Employee'
 import Attendance from './pages/Employee/Attendance'
+import Enterprise from './pages/Enterprise'
 
 const darkTheme = createTheme({
   palette: {
@@ -33,7 +34,8 @@ const App = () => (
                 <Route path='attendance' element={<Attendance />} />
               </Route>
             </Route>
-            <Route path='enterprise' />
+            <Route path='enterprise' element={<Enterprise />} />
+            <Route path='*' element={<Navigate to='/' replace={true} />} />
           </Route>
         </Routes>
       </SnackbarProvider>

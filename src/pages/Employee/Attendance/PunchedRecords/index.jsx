@@ -1,3 +1,4 @@
+import AddIcon from '@mui/icons-material/Add'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
 
@@ -279,8 +280,9 @@ const PunchedRecords = ({ punchedRecords, refresh }) => {
                 delete: false,
               })
             }
+            startIcon={<AddIcon />}
           >
-            New Record
+            New
           </Button>
         </Toolbar>
         <Table stickyHeader>
