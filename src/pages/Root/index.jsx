@@ -134,7 +134,7 @@ const Root = () => {
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
             <ButtonBox
-              title='Leave (TODO)'
+              title='Leave'
               value={value.leave}
               onClick={() => setOpen(o => ({ ...o, leave: true }))}
             />
